@@ -1,0 +1,38 @@
+---
+title: "DEEP LEARNING ALGORITHMS FOR TIME SERIES ANALYSIS WITH APPLICATIONS"
+author: "Eda Atalay & İpek Korkmaz"
+date: "16/01/2022"
+output:
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1. DEFINITION AND PURPOSE OF THE STUDY
+
+The goal of this study is to achieve fundamental and technical information about deep learning while researching the literature and applying it on code practices. 
+
+### 2. AN OVERVIEW OF DEEP LEARNING
+
+The history of deep learning goes back to McCulloch & Pitts paper published in 1943. According to the study, what makes a human brain a computational device is the neural activity in the mind. Taking this into consideration, deep learning algorithms have been influenced by human brains, which can understand complicated information.
+
+If a network has enough number of neurons and has a proper synaptic connection, then it can compute any value. In this case, a simple logic function will be applied depending on the weights in the McCulloch & Pitts neuron. Furthermore, the concept of threshold is an important feature. For a precise neuron, if the net input which is weighted sum of the inputs are greater than the certain threshold then the neuron will be fired. 
+
+In 1949, Hebb published a book called “The Organization of Behavior”. Hebb suggested that the brain's connectivity is constantly changing as an organism while learning different functional tasks. The idea behind Hebb's theory is that if two neurons are found to be active at the same time, fired together, the strength of the connection between them should be increased. The strength of the connection between neurons will be changed while learning.
+
+Tasks such as learning to classify labeled examples and recognition of distinct patterns were performed by the term called perceptron. Perceptron is the method for iterative weight arrangement, therefore the weights on the connection paths can be improved. Rosenblatt proved a theorem that the learning algorithm can find the right answer if there was a sufficient set of parameters for classifying and there were adequate number of examples. However, in the 1950s the perceptron learning algorithm was needed digital computers to compute with real numbers which was carried out insufficiently in that time. 
+
+Deep learning networks allows communication between computers and human beings while being a bridge between digital and the daily life. In other words, it provides a balance between real word which is complex and indefinite with a word with symbols and rules.  
+
+### 3. NEURAL NETWORKS  
+In this section, we closely followed the book titled “An Introduction to Statistical Learning with Application in R” by Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani.  
+
+#### 3.1. Single Layer Neural Networks  
+For predicting the response Y, a neural network will build nonlinear function $\vec{X} \to Y$ where $\small X$ is input vector of $\small n$ number of variables $\vec{X} =(X_1,X_2,...,Xn)$. These input units will affect the model’s result.  
+
+<center>![_Figure 1_](images/picture1.jpg)</center>  
+
+Figure 1 shows feed-forward neural network with single layer. The input vector X ⃗ will create input layer neurons in the neural network. Each unit from the input layer will feed the hidden layer network which has K hidden units. In this layer, the units are neither inputs nor outputs, that is why it is called hidden.  
+$$$$
+
