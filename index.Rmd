@@ -330,7 +330,8 @@ prices=MinMaxScaler().fit_transform(prices.values.reshape(len(prices),1))[:,0]
 ```
 
 Since the variables has different ranges of values, scaling is needed to get an efficient result. Fit_transform() is a combination of fit and transform method. Fit method computes the mean and standard deviation of the feature and transform method applies these calculations to every data point for each feature. MinMaxScaler() is applied for normalization which is scaling each data point with:
-$$t=\frac {x-min}{max-min}.$$
+$$t=\frac {x-min}{max-min}.$$  
+
 #### 4.4. Deep Learning Experiment
 ```{r, eval=F, echo=T}
 features_train, features_test, prices_train, prices_test = train_test_split(features, prices, test_size = 0.3, random_state = 33)

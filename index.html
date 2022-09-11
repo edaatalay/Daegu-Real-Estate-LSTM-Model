@@ -947,8 +947,10 @@ to get an efficient result. Fit_transform() is a combination of fit and
 transform method. Fit method computes the mean and standard deviation of
 the feature and transform method applies these calculations to every
 data point for each feature. MinMaxScaler() is applied for normalization
-which is scaling each data point with: <span class="math display">\[t=\frac {x-min}{max-min}.\]</span> #### 4.4. Deep
-Learning Experiment</p>
+which is scaling each data point with: <span class="math display">\[t=\frac {x-min}{max-min}.\]</span></p>
+</div>
+<div id="deep-learning-experiment" class="section level4">
+<h4>4.4. Deep Learning Experiment</h4>
 <pre class="r"><code>features_train, features_test, prices_train, prices_test = train_test_split(features, prices, test_size = 0.3, random_state = 33)</code></pre>
 <p>30% of the dataset has been remained for testing and 70% of it will
 used for training. The random_state argument ensures that the same data
