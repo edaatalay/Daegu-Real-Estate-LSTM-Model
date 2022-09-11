@@ -29,14 +29,14 @@ Deep learning networks allows communication between computers and human beings w
 In this section, we closely followed the book titled “An Introduction to Statistical Learning with Application in R” by Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani.  
 
 #### 3.1. Single Layer Neural Networks  
-For predicting the response Y, a neural network will build nonlinear function $\vec{X} \to Y$ where $\small X$ is input vector of $\small n$ number of variables $\vec{X} =(X_1,X_2,...,Xn)$. These input units will affect the model’s result.  
+For predicting the response Y, a neural network will build nonlinear function $\small \vec{X} \to Y$ where $\small X$ is input vector of $\small n$ number of variables $\small \vec{X} =(X_1,X_2,...,Xn)$. These input units will affect the model’s result.  
 
 <center>![_Figure 1: Neural network with single layer_](images/picture1.jpg)</center>  
 
-_Figure 1_ shows feed-forward neural network with single layer. The input vector $\vec{X}$ will create input layer neurons in the neural network. Each unit from the input layer will feed the hidden layer network which has K hidden units. In this layer, the units are neither inputs nor outputs, that is why it is called hidden.  
+_Figure 1_ shows feed-forward neural network with single layer. The input vector $\small \vec{X}$ will create input layer neurons in the neural network. Each unit from the input layer will feed the hidden layer network which has K hidden units. In this layer, the units are neither inputs nor outputs, that is why it is called hidden.  
 $$f(X)=β_0+\sum_{k=1}^Kβ_k h_k (X) $$  
 $$=β_0+\sum_{k=1}^Kβ_k g(w_0k+\sum_{i=1}^nw_{ik} X_i).$$
-In Equations above, $\small w_{11},…,w_{nK} $ indicate weights flow through input layer to hidden layer. Similarly,$\small β_1,β_2,…,β_K$ indicate weights flow through hidden layer to output. $\small β_0$ and $\small w_{0k}$ are the bias terms. First index of $\small w$ shows that which neuron in the input layer will feed into the hidden layer. Second index of $\small w$ shows which neuron in the hidden layer feeded up.
+In Equations above, $\small w_{11},…,w_{nK}$ indicate weights flow through input layer to hidden layer. Similarly,$\small β_1,β_2,…,β_K$ indicate weights flow through hidden layer to output. $\small β_0$ and $\small w_{0k}$ are the bias terms. First index of $\small w$ shows that which neuron in the input layer will feed into the hidden layer. Second index of $\small w$ shows which neuron in the hidden layer feeded up.
 
 $\smallβ$  and $\small w$ parameters must be estimated from data. 
 
