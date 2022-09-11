@@ -53,17 +53,17 @@ $$f(X)= β_0+\sum_{k=1}^Kβ_k A_{k}. $$
 ##### 3.1.1.1. Sigmoid Activation Function
 
 Sigmoid activation function was used as a default activation function for neural network until the early 1990s. It scales input values between 0 and 1,  
-$$g(z)=  \frac{e^z}{(1+ e^z )}=  \frac{1}{(1+ e^{-z})}.$$  
+$$g(t)=  \frac{e^t}{(1+ e^t )}=  \frac{1}{(1+ e^{-t})}.$$  
 Only changes around the mid-point are sensitive to the functions as seen in _Figure 2_.  
 
 ##### 3.1.1.2. ReLU Activation Function
 
 The rectified linear activation function (ReLU) is a piecewise function that when input value is positive it equals to itself, or else it equals to 0. If the input value is positive ReLU function is linear, or else it is nonlinear. The ReLU function is more sensitive than sigmoid function.  
 \begin{equation}
-g(z)=(z)_{+}= 
+g(t)=(t)_{+}= 
 \begin{cases} 
-0         & \text{if } z < 0 \\
-z         & \text{otherwise } 
+0         & \text{if } t < 0 \\
+t         & \text{otherwise } 
 \end{cases}
 \end{equation}
 <center>![_Figure 2:Sigmoid and ReLU activation functions, respectively_](images/picture2.jpg)</center>  
@@ -183,7 +183,224 @@ Several variables are considered as less relevant to the house sale prices. For 
 
 After dropping,  there are only 19 columns are remained as shown in _Table 2_. For the regression problem, the target variable is chosen as “SalePrice”.
 
+<style>
+table {
+  text-align:center;
+  font-family: arial, sans-serif;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+td{
+  text-align:left;
+  border: 1px solid black;
+  padding: 8px;
+}
+th {
+  text-align:center;
+  border: 1px solid black;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<table class="center" >
+  <tr>
+    <th>Column name     </th>
+    <th>Description</th>
+    <th>Type</th>
+  </tr>
+  <tr>
+    <td>SalePrice</td>
+    <td>Price in US dollar</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>YearBuilt</td>
+    <td>Year that apartment is built.</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Size(sqf)</td>
+    <td>Size of apartment in square feet.</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Floor</td>
+    <td>What floor is property located</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>HallwayType</td>
+    <td>Type of the hallway</td>
+    <td>Categoric</td>
+  </tr>
+  <tr>
+    <td>HeatingType</td>
+    <td>Type of the heating</td>
+    <td>Categoric</td>
+  </tr>
+  <tr>
+    <td>N_elevators</td>
+    <td>Total number of elevators in an apartment complex</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>SubwayStation</td>
+    <td>Name of subway station nearby apartment</td>
+    <td>Categoric</td>
+  </tr>
+  <tr>
+    <td>N_FacilitiesNearBy(PublicOffice)</td>
+    <td>Number of public offices nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_FacilitiesNearBy(Hospital)</td>
+    <td>Number of hospitals nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_FacilitiesNearBy(Dpartmentstore)</td>
+    <td>Number of department stores nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_FacilitiesNearBy(Mall)</td>
+    <td>Number of malls nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_FacilitiesNearBy(ETC)</td>
+    <td>Number of hotels, special schools etc.</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_FacilitiesNearBy(Park)</td>
+    <td>Number of parks nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_SchoolNearBy(Elementary)</td>
+    <td>Number of elementary schools nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_SchoolNearBy(Middle)</td>
+    <td>Number of middle schools nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>N_SchoolNearBy(High)</td>
+    <td>Number of high schools nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+   <tr>
+    <td>N_SchoolNearBy(University)</td>
+    <td>Number of universities nearby apartment</td>
+    <td>Numeric</td>
+  </tr>
+   <tr>
+    <td>N_FacilitiesInApt</td>
+    <td>Number of facilities for residents like swimming pool, gym, playground</td>
+    <td>Numeric</td>
+  </tr>
+</table>
+<center><p> _Table 2: Columns of the dataset after tidying with data types._ </p></center>  
 
+#### 4.3. Data Manipulation  
+```{r, eval=F, echo=T}
+daegu_df = pd.get_dummies(daegu_df, drop_first=True)
+```
 
+There are 3 categorical variables as seen as _Table 2_. Since the data type is categorical, to use these variables in the model, it is necessary to convert them into numerical values. The term one hot encoding means that categorical variables are represented as binary form such as 0s and 1s. Therefore, with using get_dummies function from pandas library, these variables turn into one hot encoding form. After this process the number of columns increases to 26. Furthermore, argument "drop_first" of get_dummies is used to reduce the correlations created among dummy variables with dropping out the extra column. 
 
+```{r, eval=F, echo=T}
+features = daegu_df.iloc[:, 1:30]
+prices = daegu_df.iloc[:, 0]
+```
+
+The dataset is divided into features and prices for training.  
+
+```{r, eval=F, echo=T}
+features = MinMaxScaler().fit_transform(features) 
+prices=MinMaxScaler().fit_transform(prices.values.reshape(len(prices),1))[:,0]
+```
+
+Since the variables has different ranges of values, scaling is needed to get an efficient result. Fit_transform() is a combination of fit and transform method. Fit method computes the mean and standard deviation of the feature and transform method applies these calculations to every data point for each feature. MinMaxScaler() is applied for normalization which is scaling each data point with:
+$$t=\frac {x-min}{max-min}.$$
+#### 4.4. Deep Learning Experiment
+```{r, eval=F, echo=T}
+features_train, features_test, prices_train, prices_test = train_test_split(features, prices, test_size = 0.3, random_state = 33)
+```
+
+30% of the dataset has been remained for testing and 70% of it will used for training. The random_state argument ensures that the same data is distributed every time when model runs.
+
+```{r, eval=F, echo=T}
+model = Sequential()
+model.add(Dense(20, input_shape=(25,), activation='relu'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(1, activation='linear')
+```
+
+There is a function called Sequential() to build models layer by layer in Keras. Each layer is followed by the next layer with its corresponding weights. The add function is used for adding layers to the model. 
+Dense class is applied for connecting layers. In the first argument of the Dense class, the number of neurons for each layer is defined. The input_shape argument specifies the number of neurons in the input layer. 
+For activation function, ReLU and linear function is used for hidden layers and output, respectively.
+
+```{r, eval=F, echo=T}
+model.compile(loss='mean_squared_error', optimizer='sgd')
+```
+
+The loss function is needed to be specified for evaluating weights according to it. The optimizer Stochastic Gradient Descent (SGD) is used for computation of the gradient and it will update the weights on small batches. 
+
+```{r, eval=F, echo=T}
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5)
+```
+
+While training the model, the number of epochs to apply is a crucial issue. If the number of epochs is high, the developed model may be over-fitting for the training dataset, while using less may result in underfitting. This problem can be avoided by applying the early stopping method. On model.fit, argument “epochs” mostly given as large numbers. The early stopping stops training of the model when it realizes the model has already learned.
+
+```{r, eval=F, echo=T}
+history = model.fit(features_train, prices_train, epochs=1000, batch_size=30, validation_data=(features_test, prices_test), callbacks=[es])
+```
+
+The model has been specified and compiled; therefore, it is now ready for efficient computing.
+
+```{r, eval=F, echo=T}
+plt.plot(history.history['loss'], label='Training')
+plt.plot(history.history['val_loss'], label='Validation')
+plt.legend()
+plt.show()
+```
+
+Y axis shows loss which is the mean squared error value while x axis showing epochs. _Figure 4_ shows comparison of training data and validation data. It shows decrease in the loss by epochs. 
+
+<center>![_Figure 4:Comparison of training and validation data_](images/picture4.jpg)</center>
+
+```{r, eval=F, echo=T}
+model.evaluate(features_test,prices_test)
+```
+
+model.evaluate shows test data’s loss value for the model that been build. For this practice, the test data’s loss is 0.007.  
+
+```{r, eval=F, echo=T}
+model.summary()
+```
+
+In model.summary() output, the number of neurons and parameters are shown for each layer. Also, total number of parameters are shown.  
+
+### 5. RESULTS
+
+Feed forward neural network, which is a subject of deep learning was thoroughly learned during this semester. Also, preparation and research have been done for the application to be held in the next semester. While researching, the mathematical relationships and the parameters affecting the result were learned, the related equations were examined. In addition, regression problem sample was studied to reinforce what was learned throughout this period. Deep learning functions and their arguments on Python were examined and practiced on the sample data set.
+
+### 6. FUTURE WORKS
+
+In the next semester, recurrent neural networks will be learned before the application which is the main purpose of this design. Later, with the recurrent neural networks examined, we plan to study on climate dataset which is time series. Therefore, after deciding which dataset we will study on, by examining the dataset, we will develop a model for problem we detected. Afterwards, we will investigate the change over time for our problem and try to predict the future.
+
+### REFERENCES  
+* [Computational Neuroscience: Mathematical and Statistical Perspective](https://www.annualreviews.org/doi/10.1146/annurev-statistics-041715-033733)  
+* [Introduction to Neural Networks Using Matlab 6.0](https://books.google.com.tr/books?hl=tr&lr=&id=jJTN8RPgyXgC&oi=fnd&pg=PR21&dq=S.N.+Sivanandam,+S.+Sumathi,+S.N.+Deepa,+Introduction+to+Neural+Networks+Using+Matlab+6.0+(McGraw+Hill+Education+(India)+Private+Ltd.,+2006)%0A&ots=h1cxOQLyOJ&sig=OWBFNKIPYtnu2uqKPioDly-9oXA&redir_esc=y#v=onepage&q&f=false)  
+* [The unreasonable effectiveness of deep learning in artificial intelligence](https://www.pnas.org/content/117/48/30033Ad)  
+* [An Introduction to Statistical Learning with Application in R](https://www.statlearning.com/)  
+* [A Gentle Introduction to the Rectified Linear Unit (ReLU)](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/)
