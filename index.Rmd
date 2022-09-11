@@ -44,7 +44,7 @@ $\smallβ$  and $\small w$ parameters must be estimated from data.
 
 Nonlinearity is included to a neuron through activation function that is crucial for finding a solution of complex neural network problems. If nonlinearity in the activation function is not applied, network model turns into a simple linear regression model. Also, the nonlinearity of the activation function provides better reflection of complex data.
 
-$\small A_k$ are the neurons in the hidden layer.$\small h_k (X) $is the function that builds $\small A_k$ with input features. $\small g(t)$ is an activation function that is nonlinear in advance:  
+$\small A_k$ are the neurons in the hidden layer. $\small h_k (X)$ is the function that builds $\small A_k$ with input features. $\small g(t)$ is an activation function that is nonlinear in advance:  
 $$A_k= h_k(X)=g(w_{0k}+\sum_{i=1}^nw_{ik} X_i).$$
 $\small f(X)$  function will be computed with weights $\small β_k$ and the activations $\small A_k$ from hidden layer pass into the output layer: 
 
