@@ -102,13 +102,86 @@ while $\small m=1,2,…,p$ if all these results are different.
 
 #### 4.1. The Libraries Used
  
-The Python libraries showed in the _Table 1_, are essential to be able to use particular functions.
+The Python libraries showed in the _Table 1_, are essential to be able to use particular functions.  
 
+<style>
+table {
+  text-align:center;
+  font-family: arial, sans-serif;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+td{
+  text-align:left;
+  border: 1px solid black;
+  padding: 8px;
+}
+th {
+  text-align:center;
+  border: 1px solid black;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<table class="center" >
+  <tr>
+    <th>Libraries      </th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>NumPy</td>
+    <td>NumPy is the essential package for scientific computing such as linear algebra.</td>
+  </tr>
+  <tr>
+    <td>pandas</td>
+    <td>Pandas is an open-source data analysis and manipulation tool built on the Python programming language.</td>
+  </tr>
+  <tr>
+    <td>tensorflow</td>
+    <td>TensorFlow is an open-source library which is used mainly for deep learning applications.</td>
+  </tr>
+  <tr>
+    <td>sklearn</td>
+    <td>Sklearn library is essential for machine learning applications and statistical modeling in term of tools for classification and regression.</td>
+  </tr>
+  <tr>
+    <td>keras</td>
+    <td>Keras which runs on top of the TensorFlow is used for evaluating deep learning models such as artificial neural networks.</td>
+  </tr>
+  <tr>
+    <td>matplotlib</td>
+    <td>Matplotlib is useful library for data visualization and graphical plotting.</td>
+  </tr>
+</table>
+<center><p> _Table 1: Python libraries used._ </p></center> 
 
+```{r, eval=F, echo=T}
+import numpy as np
+import matplotlib.pyplot as plt  import pandas as pd
+from pandas import Series from tensorflow.keras.models import Sequential from tensorflow.keras.layers import Dense
+from sklearn.model_selection import train_test_split from keras.callbacks import EarlyStopping
+from sklearn.preprocessing import MinMaxScaler
+```
 
+#### 4.2. The Dataset
 
+The dataset is taken from [Kaggle](https://www.kaggle.com/gunhee/koreahousedata).
 
+```{r, eval=F, echo=T}
+daegu_df = pd.read_csv("Daegu_Real_Estate_data.csv")
+```
+  
+The data called Daegu_Real_Estate_data is in CSV format. The dataset contains house sale prices in the city of Daegu, Republic of Korea. 
+
+The dataset has 5891 rows and 30 columns. This dataset is chosen because it is suitable for the regression problem and has large number of entries without NA values. Moreover, due to the large number of columns, the result depended on many different variables. 
+
+Several variables are considered as less relevant to the house sale prices. For this reason, some columns are dropped. 
+
+After dropping,  there are only 19 columns are remained as shown in _Table 2_. For the regression problem, the target variable is chosen as “SalePrice”.
 
 
 
