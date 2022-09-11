@@ -31,8 +31,86 @@ In this section, we closely followed the book titled “An Introduction to Stati
 #### 3.1. Single Layer Neural Networks  
 For predicting the response Y, a neural network will build nonlinear function $\vec{X} \to Y$ where $\small X$ is input vector of $\small n$ number of variables $\vec{X} =(X_1,X_2,...,Xn)$. These input units will affect the model’s result.  
 
-<center>![_Figure 1_](images/picture1.jpg)</center>  
+<center>![_Figure 1: Neural network with single layer_](images/picture1.jpg)</center>  
 
-Figure 1 shows feed-forward neural network with single layer. The input vector X ⃗ will create input layer neurons in the neural network. Each unit from the input layer will feed the hidden layer network which has K hidden units. In this layer, the units are neither inputs nor outputs, that is why it is called hidden.  
-$$$$
+_Figure 1_ shows feed-forward neural network with single layer. The input vector $\vec{X}$ will create input layer neurons in the neural network. Each unit from the input layer will feed the hidden layer network which has K hidden units. In this layer, the units are neither inputs nor outputs, that is why it is called hidden.  
+$$f(X)=β_0+\sum_{k=1}^Kβ_k h_k (X) $$  
+$$=β_0+\sum_{k=1}^Kβ_k g(w_0k+\sum_{i=1}^nw_{ik} X_i).$$
+In Equations above, $\small w_{11},…,w_{nK} $ indicate weights flow through input layer to hidden layer. Similarly,$\small β_1,β_2,…,β_K$ indicate weights flow through hidden layer to output. $\small β_0$ and $\small w_{0k}$ are the bias terms. First index of $\small w$ shows that which neuron in the input layer will feed into the hidden layer. Second index of $\small w$ shows which neuron in the hidden layer feeded up.
+
+$\smallβ$  and $\small w$ parameters must be estimated from data. 
+
+##### 3.1.1. Activation Function 
+
+Nonlinearity is included to a neuron through activation function that is crucial for finding a solution of complex neural network problems. If nonlinearity in the activation function is not applied, network model turns into a simple linear regression model. Also, the nonlinearity of the activation function provides better reflection of complex data.
+
+$\small A_k$ are the neurons in the hidden layer.$\small h_k (X) $is the function that builds $\small A_k$ with input features. $\small g(t)$ is an activation function that is nonlinear in advance:  
+$$A_k= h_k(X)=g(w_{0k}+\sum_{i=1}^nw_{ik} X_i).$$
+$\small f(X)$  function will be computed with weights $\small β_k$ and the activations $\small A_k$ from hidden layer pass into the output layer: 
+
+$$f(X)= β_0+\sum_{k=1}^Kβ_k A_{k}. $$  
+
+##### 3.1.1.1. Sigmoid Activation Function
+
+Sigmoid activation function was used as a default activation function for neural network until the early 1990s. It scales input values between 0 and 1,  
+$$g(z)=  \frac{e^z}{(1+ e^z )}=  \frac{1}{(1+ e^{-z})}.$$  
+Only changes around the mid-point are sensitive to the functions as seen in _Figure 2_.  
+
+##### 3.1.1.2. ReLU Activation Function
+
+The rectified linear activation function (ReLU) is a piecewise function that when input value is positive it equals to itself, or else it equals to 0. If the input value is positive ReLU function is linear, or else it is nonlinear. The ReLU function is more sensitive than sigmoid function.  
+\begin{equation}
+g(z)=(z)_{+}= 
+\begin{cases} 
+0         & \text{if } z < 0 \\
+z         & \text{otherwise } 
+\end{cases}
+\end{equation}
+<center>![_Figure 2:Sigmoid and ReLU activation functions, respectively_](images/picture2.jpg)</center>  
+Earlier, sigmoid activation function was preferred, but today, ReLU activation function is common in modern neural networks because it is more powerful to compute and store.   
+
+##### 3.1.2. Squared-Error Loss
+
+Squared error function is commonly used to estimate efficiency of the neural network model. It is used to compare the predicted value with the actual value where $\small f(x_i)$ is the prediction and $\small y_i$ is the $\small i^{th}$ observation. The unknown parameters such as biases and weights are determined to minimize
+
+$$\sum_{i=1}^n(y_i-f(x_i ))^2,$$  
+while fitting the model.  
+
+#### 3.2. Multilayer Neural Networks
+
+A large size single hidden layer is theoretically sufficient to make an acceptable approximation. Nevertheless, more than one hidden layer with small size returns good results much more easily.  
+<center>![_Figure 3: Neural network with two hidden layers, p number of outputs and weight matrices $\small W_1$ ,$\small W_2$,B_.](images/picture3.jpg)</center>  
+
+Apart from the number of layers, the difference between _Figure 1_ and _Figure 3_ is the number of results. In single layer neural network there were one output, however in this example, in two hidden layer neural network there are p number of outputs. Nevertheless, it is not necessary to have multiple outputs.
+
+Similarly to single layer neural network, the activation function applied from input layer to first hidden layer:
+
+$$A_k^{(1)}  = h_k^{(1)}(X) = g(w_{0k}^{(1)}+\sum_{i=1}^nw_{ik}^{(1)} X_i), $$  
+for $\small k=1,2,…,K_1.$  
+
+First hidden layer activations $\small A_k^{(1)} $ will be treated as inputs for the second hidden layer activations:   
+$$A_l^{(2)}  = h_l^{(2)}(X) = g(w_{0l}^{(2)}+\sum_{k=1}^{K_1}w_{kl}^{(2)} A_k^{(1)})$$  
+for $\small l=1,2,…,K_2.$  
+
+Each of the activation functions, are function of $\small \vec{X}$ input vector. After sequences of transformations, the network will generate complex $\small \vec{X}$ transformations which are fed as features into the output layer.  
+
+At the output layer there are p number of results. The function is 
+$$f_m (X)=β_{0m}+\sum_{l=1}^{K_2}β_{lm}h_l^{(2)}(X)=β_{0m}+\sum_{l=1}^{K_2}β_{lm}A_l^{(2)},$$
+while $\small m=1,2,…,p$ if all these results are different.  
+
+### 4. CODE PRACTICES  
+
+#### 4.1. The Libraries Used
+ 
+The Python libraries showed in the _Table 1_, are essential to be able to use particular functions.
+
+
+
+
+
+
+
+
+
+
 
